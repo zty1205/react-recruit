@@ -1,0 +1,110 @@
+/* reset */
+body, 
+div, 
+dl, dt, dd, 
+ul, ol, li, 
+h1, h2, h3, h4, h5, h6, 
+pre, 
+code, 
+form, 
+fieldset, 
+legend, 
+input, 
+textarea, 
+p, 
+blockquote, 
+th, td, hr, 
+button, article, aside, details, 
+figcaption, figure, footer, 
+header, hgroup, menu, nav, section {
+	margin: 0;
+	padding: 0;
+}
+*{
+	tap-highlight-color:rgba(255,255,255,0);
+	-webkit-tap-highlight-color:rgba(255,255,255,0);
+	-moz-tap-highlight-color:rgba(255,255,255,0);
+}
+
+body {
+    word-wrap: break-word;
+    user-select: none;
+    -webkit-user-select: none;
+}
+body {
+  font-family: PingFang SC, Helvetica, Arial, Microsoft Yahei,
+  Hiragino Sans GB, Heiti SC, WenQuanYi Micro Hei, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+p {
+  line-height: 1em;
+}
+img{
+    display: block;
+    width: 100%;
+    tap-highlight-color:rgba(255,255,255,0);
+    -webkit-tap-highlight-color:rgba(255,255,255,0);
+    -moz-tap-highlight-color:rgba(255,255,255,0);
+    -webkit-user-select:none; 
+    -moz-user-select:none;
+    -ms-user-select: none; 
+    user-select: none;
+}
+
+.abs-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 水平居中 */
+.x-center {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+/* 垂直居中 */
+.y-center {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+/* 清除浮动 */
+.clear-f::after {
+  display: block;
+  height: 0;
+  content: '';
+  clear: both;
+}
+
+/* 浮动 */
+.f-left {
+  float: left;
+}
+.f-right {
+  float: right;
+}
+.border-1px {
+  position: relative;
+}
+.border-1px::after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  transform-origin: center top;
+  -webkit-transform-origin: center top;
+  border-top: 1px solid #E6E6E6;
+  width: 100%;
+  height: 200%;
+  transform: scaleY(0.5);
+  -webkit-transform: scaleY(0.5);
+}
