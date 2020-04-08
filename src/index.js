@@ -12,12 +12,14 @@ import './index.css';
 
 import Login from './view/Login/login.js'
 import Register from './view/Register/register.js'
-import AuthRoute from './component/AuthRoute/authRoute';
+import AuthRoute from './component/AuthRoute/authRoute'
+
 
 const store = createStore(reducers, compose(
   applyMiddleware(thunk),
   window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f()
 ))
+
 
 ReactDOM.render(
   (
