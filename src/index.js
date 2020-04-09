@@ -12,7 +12,10 @@ import './index.css';
 
 import Login from './view/Login/login.js'
 import Register from './view/Register/register.js'
+import GeniusInfo from './view/GeniusInfo/geniusInfo'
+import BossInfo from './view/BossInfo/bossInfo'
 import AuthRoute from './component/AuthRoute/authRoute'
+
 
 
 const store = createStore(reducers, compose(
@@ -29,6 +32,8 @@ ReactDOM.render(
         <AuthRoute></AuthRoute>
         <Route path="/login" component={Login}></Route>
         <Route path="/register" component={Register}></Route>
+        <Route path="/bossInfo" component={BossInfo}></Route>
+        <Route path="/geniusInfo" component={GeniusInfo}></Route>
       </BrowserRouter>
     </Provider>
   // </React.StrictMode>

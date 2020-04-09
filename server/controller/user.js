@@ -12,7 +12,6 @@ Router.get('/list', function (req, res) {
 })
 
 Router.get('/info', function (req, res) {
-  console.log('cookies = ', req.cookies)
   const { userid } = req.cookies
   if (!userid) {
     return res.json({ code: 1 })
@@ -56,7 +55,7 @@ Router.post('/register', function (req, res) {
     //   }
     //   return res.json({code: 0})
     // })
-    const userModel = new User({ user, ype, pwd: utility.md5(pwd) })
+    const userModel = new User({ user, type, pwd: utility.md5(pwd) })
     userModel.save(function (e, d) {
       if (e) {
         return res.json({ code: 1, msg: '后端出错了' })
@@ -65,6 +64,22 @@ Router.post('/register', function (req, res) {
       res.cookie('userid', _id)
       return res.json({ code: 0, data: { user, type, _id } })
     })
+  })
+})
+
+// 更新个人信息
+Router.post('/update', function (req, res) {
+  const userid = req.cookies.userid
+  if (!userid) {
+    return res.json({ code: 1 })
+  }
+  const body = req.body
+  User.findByIdAndUpdate(userid, body, function (err, doc) {
+    const data = Object.assign({}, {
+      user: doc.user,
+      type: doc.type
+    }, body)
+    return res.json({ code: 0, data })
   })
 })
 
