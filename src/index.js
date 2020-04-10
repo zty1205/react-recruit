@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
 import reducers from './reducer'
 
@@ -15,6 +15,7 @@ import Register from './view/Register/register.js'
 import GeniusInfo from './view/GeniusInfo/geniusInfo'
 import BossInfo from './view/BossInfo/bossInfo'
 import AuthRoute from './component/AuthRoute/authRoute'
+import Dashboard from './component/Dashboard/dashboard'
 
 
 
@@ -30,10 +31,13 @@ ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
         <AuthRoute></AuthRoute>
-        <Route path="/login" component={Login}></Route>
-        <Route path="/register" component={Register}></Route>
-        <Route path="/bossInfo" component={BossInfo}></Route>
-        <Route path="/geniusInfo" component={GeniusInfo}></Route>
+        <Switch>
+          <Route path="/login" component={Login}></Route>
+          <Route path="/register" component={Register}></Route>
+          <Route path="/bossInfo" component={BossInfo}></Route>
+          <Route path="/geniusInfo" component={GeniusInfo}></Route>
+          <Route component={Dashboard}></Route>
+        </Switch>
       </BrowserRouter>
     </Provider>
   // </React.StrictMode>

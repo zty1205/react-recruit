@@ -2,6 +2,7 @@
   "name": "react-recruit",
   "version": "0.1.0",
   "private": true,
+  "keywords": ["react", "react-router", "redux", "node", "express", "mongodb"],
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",

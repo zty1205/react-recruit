@@ -27,7 +27,6 @@ const initState = {
 
 // reducers
 export function user(state = initState, action) {
-  console.log('action = ', action)
   switch (action.type) {
     case AUTH_SUCCESS:
       return { ...state, msg: '', isAuth: true, redirectTo: getRedirectPath(action.payload), ...action.payload }
@@ -42,7 +41,7 @@ export function user(state = initState, action) {
 
 function authSuccess(obj) {
   // eslint-disable-next-line
-  const {pwd, data} = obj // 过滤pwd属性
+  const {pwd, ...data} = obj // 过滤pwd属性
   return { type: AUTH_SUCCESS, payload: data }
 }
 
