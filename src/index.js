@@ -32,10 +32,11 @@ ReactDOM.render(
       <BrowserRouter>
         <AuthRoute></AuthRoute>
         <Switch>
-          <Route path="/login" component={Login}></Route>
-          <Route path="/register" component={Register}></Route>
-          <Route path="/bossInfo" component={BossInfo}></Route>
-          <Route path="/geniusInfo" component={GeniusInfo}></Route>
+          <Route exact path="/" component={Login}></Route>
+          <Route exact path="/login" component={Login}></Route>
+          <Route exact path="/register" component={Register}></Route>
+          <Route exact  path="/bossInfo" component={BossInfo}></Route>
+          <Route exact path="/geniusInfo" component={GeniusInfo}></Route>
           <Route component={Dashboard}></Route>
         </Switch>
       </BrowserRouter>

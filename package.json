@@ -2,7 +2,14 @@
   "name": "react-recruit",
   "version": "0.1.0",
   "private": true,
-  "keywords": ["react", "react-router", "redux", "node", "express", "mongodb"],
+  "keywords": [
+    "react",
+    "react-router",
+    "redux",
+    "node",
+    "express",
+    "mongodb"
+  ],
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -10,6 +17,7 @@
     "antd-mobile": "^2.3.1",
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
+    "browser-cookies": "^1.2.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",

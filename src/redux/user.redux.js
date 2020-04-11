@@ -3,6 +3,7 @@ import axios from 'axios'
 const AUTH_SUCCESS = 'auth_success' // login and register
 const ERRPOR_MSG = 'error_msg'
 const LOAD_DATA = 'load_data'
+const LOGINOUT = 'login_out'
 
 function getRedirectPath({ type, avatar }) {
   console.log('type = ', type)
@@ -34,6 +35,8 @@ export function user(state = initState, action) {
       return { ...state, ...action.payload }
     case ERRPOR_MSG:
       return { ...state, isAuth: false, msg: action.msg }
+    case LOGINOUT:
+      return {...initState, redirectTo: '/login'}
     default:
       return state
   }
@@ -48,6 +51,10 @@ function authSuccess(obj) {
 export function loadData(userInfo) {
   return { type: LOAD_DATA, payload: userInfo }
 }
+
+export function loginOut(userInfo) {
+  return { type: LOGINOUT }
+} 
 
 function errorMsg(msg) {
   return { msg, type: ERRPOR_MSG }
