@@ -35,3 +35,20 @@ code {
   pointer-events: all;
   cursor: pointer;
 }
+
+#chat-page .chat-me .am-list-extra {
+  flex-basis: auto;
+}
+
+#chat-page .chat-me .am-list-content {
+  padding-right: .3rem;
+  text-align: right;
+}
+
+.sticker-footer {
+  z-index: 10;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}

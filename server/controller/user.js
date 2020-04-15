@@ -3,6 +3,7 @@ const utility = require('utility')
 const Router = express.Router()
 const model = require('../DB/db')
 const User = model.getModel('user')
+const Chat = model.getModel('chat')
 
 Router.get('/list', function (req, res) {
   // User.remove({}, function() {})
@@ -81,6 +82,22 @@ Router.post('/update', function (req, res) {
       type: doc.type
     }, body)
     return res.json({ code: 0, data })
+  })
+})
+
+Router.get('/getMsgList', function(req, res) {
+  const userid = req.cookies.userid
+  if (!userid) {
+    return res.json({ code: 1 })
+  }
+  // {'$or': [{from: userid, to: userid}]}
+  Chat.find({}, function(err, doc) {
+    if (!err) {
+      return res.json({
+        code: 0,
+        msgList: doc
+      })
+    }
   })
 })
 
