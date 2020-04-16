@@ -8,23 +8,25 @@ const MSG_READ = 'msg-read'
 
 const initState = {
   chatMsg: [],
+  users: {}, // 用户匹配
   unread: 0 // 未读条数
 }
 
 export function chat(state = initState, action) {
-  console.log('action = ', action)
   switch(action.type) {
     case MSG_LIST: 
       return {
         ...state, 
-        chatMsg: action.playload, 
-        unread: action.playload.filter(v => !v.read).length
+        users: action.playload.users,
+        chatMsg: action.playload.msgs, 
+        unread: action.playload.msgs.filter(v => !v.read && v.to === action.playload.userId).length
       }
     case MSG_RECEIVE:
+      const n = action.playload.to === action.playload.userId ? 1 : 0 
       return {
         ...state,
-        chatMsg: [...state.chatMsg, action.playload],
-        unread: state.unread + 1
+        chatMsg: [...state.chatMsg, action.playload.msg],
+        unread: state.unread + n
       }
     case MSG_READ:
       return state
@@ -34,18 +36,20 @@ export function chat(state = initState, action) {
 }
 
 // actionCreator
-function msgList(msgs) {
-  return {type: MSG_LIST, playload: msgs}
+function msgList(msgs, users, userId) {
+  return {type: MSG_LIST, playload: {msgs, users, userId}}
 }
-function msgReceive(msg) {
-  return {type: MSG_RECEIVE, playload: msg}
+function msgReceive(msg, userId) {
+  return {type: MSG_RECEIVE, playload: {msg, userId}}
 }
 
 export function getMsgList() {
-  return dispatch => {
+  return (dispatch, getState) => {
+    // getState 可获取所有state
     axios.get('/user/getMsgList').then(res => {
       if (res.status === 200 && res.data.code === 0) {
-        dispatch(msgList(res.data.msgList))
+        const userId = getState().user._id
+        dispatch(msgList(res.data.msgList, res.data.users, userId))
       }
     })
   }
@@ -58,10 +62,10 @@ export function sendMsg({from, to, msg}) {
 }
 
 export function receiveMsg() {
-  return dispatch => {
+  return (dispatch, getState) => {
     socket.on('receiveMsg', function(data) {
-      console.log('reciveMsg data = ', data)
-      dispatch(msgReceive(data))
+      const userId = getState().user._id
+      dispatch(msgReceive(data, userId))
     })
   }
 }

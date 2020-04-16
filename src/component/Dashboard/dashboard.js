@@ -17,14 +17,12 @@ function Msg() {
 	{ getMsgList, sendMsg, receiveMsg }
 )
 class Dashboard extends React.Component {
-  // componentDidMount() {
-  //   setTimeout(() => {
-  //     console.log('state = ', this.state)
-  //     console.log('props = ', this.props)
-  //   }, 1000)
-  //   this.props.getMsgList()
-  //   this.props.receiveMsg()
-  // }
+  componentDidMount() {
+    if (!this.props.chat.chatMsg.length) {
+      this.props.getMsgList()
+      this.props.receiveMsg()
+    }
+  }
 	render() {
 		const { pathname } = this.props.location
 		const user = this.props.user

@@ -8,7 +8,8 @@ const Chat = model.getModel('chat')
 Router.get('/list', function (req, res) {
   // User.remove({}, function() {})
   let { type } = req.query
-  User.find({ type }, function (err, doc) {
+  let find = type ? { type } : {}
+  User.find(find, function (err, doc) {
     return res.json({ code: 0, data: doc })
   })
 })
@@ -90,15 +91,20 @@ Router.get('/getMsgList', function(req, res) {
   if (!userid) {
     return res.json({ code: 1 })
   }
-  // {'$or': [{from: userid, to: userid}]}
-  Chat.find({}, function(err, doc) {
-    if (!err) {
-      return res.json({
-        code: 0,
-        msgList: doc
-      })
-    }
+  let users = {}
+  User.find({}, function(e, userDoc) {
+    userDoc.forEach(x => (users[x._id] = {name: x.user, avatar: x.avatar}))
+    Chat.find({'$or': [{from: userid}, {to: userid}]}, function(err, doc) {
+      if (!err) {
+        return res.json({
+          code: 0,
+          msgList: doc,
+          users: users
+        })
+      }
+    })
   })
+  // 
 })
 
 module.exports = Router

@@ -44,6 +44,12 @@ code {
   padding-right: .3rem;
   text-align: right;
 }
+#chat-page .am-grid-icon {
+  display: none;
+}
+#chat-page .am-grid-text {
+  margin-top: 0;
+}
 
 .sticker-footer {
   z-index: 10;
