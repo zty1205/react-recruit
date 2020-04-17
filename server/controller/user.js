@@ -107,4 +107,20 @@ Router.get('/getMsgList', function(req, res) {
   // 
 })
 
+
+Router.post('/readMsg', function(req, res) {
+  const userid = req.cookies.userid
+  if (!userid) {
+    return res.json({ code: 1 })
+  }
+  let {from} = req.body
+  Chat.update({from, to: userid}, {'$set': {read: true}}, {"multi": true}, function(err, doc) {
+    // doc : {n, nModified, ok} n 数据量，nModified修改了几行，ok=1是否修改成功
+    if (!err) {
+      return res.json({code: 0, num: doc.nModified})
+    }
+    return res.json({code: 1, msg: '更新失败'})
+  })
+})
+
 module.exports = Router

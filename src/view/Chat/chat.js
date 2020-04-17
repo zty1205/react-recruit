@@ -1,13 +1,13 @@
 import React from 'react'
 import {List, InputItem, NavBar, Icon, Grid} from 'antd-mobile'
 import { connect } from 'react-redux'
-import { getMsgList, receiveMsg, sendMsg } from '../../redux/chat.redux'
+import { getMsgList, receiveMsg, sendMsg, readMsg } from '../../redux/chat.redux'
 
 const EMOJI = '😀 😃 🤣 😍'.split(' ').filter(x => x).map(v => ({text: v}))
 
 @connect(
   state => state,
-  { getMsgList, sendMsg, receiveMsg }
+  { getMsgList, sendMsg, receiveMsg, readMsg }
 )
 class Chat extends React.Component {
 	constructor(props) {
@@ -39,6 +39,10 @@ class Chat extends React.Component {
       this.props.receiveMsg()
     }
   }
+  componentWillUnmount() { // 相当于路由离开了 且没有keep-alive
+    const to = this.props.match.params.user // 更新已读
+    this.props.readMsg(to)
+  }
 	render() {
     const userId = this.props.match.params.user // id
     const Item = List.Item
@@ -57,15 +61,12 @@ class Chat extends React.Component {
         {chatMsg.map(v => {
           const avatar = require(`../../component/img/${userMap[v.from].avatar}.png`)
           return v.from === userId ? (
-            <List key={v._id} className="chat-me"
-              thumb={avatar}
-              >
-              <Item>收到的：{v.content}</Item>
+            <List key={v._id} className="chat-me">
+              <Item extra={<img src={avatar} alt="头像"></img>}>收到的：{v.content}</Item>
             </List>
           ) : (
-            <List key={v._id}
-             extra={<img src={avatar} alt="头像"></img>}>
-              <Item>我发出的：{v.content}</Item>
+            <List key={v._id}>
+              <Item thumb={avatar}>我发出的：{v.content}</Item>
             </List>
           )
         })}

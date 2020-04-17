@@ -29,7 +29,11 @@ export function chat(state = initState, action) {
         unread: state.unread + n
       }
     case MSG_READ:
-      return state
+      const {from, num} = action.playload
+      return {
+        ...state, 
+        chatMsg: state.chatMsg.map(v => ({...v, read: v.from === from ? true : v.from })), // 只更新一组，而不是全部
+        unread: state.unread - num}
     default: 
       return state
   }
@@ -41,6 +45,10 @@ function msgList(msgs, users, userId) {
 }
 function msgReceive(msg, userId) {
   return {type: MSG_RECEIVE, playload: {msg, userId}}
+}
+
+function msgRead({from, to, num}) {
+  return { type: MSG_READ, playload: {from, to, num}  }
 }
 
 export function getMsgList() {
@@ -66,6 +74,18 @@ export function receiveMsg() {
     socket.on('receiveMsg', function(data) {
       const userId = getState().user._id
       dispatch(msgReceive(data, userId))
+    })
+  }
+}
+
+export function readMsg(from) {
+  return (dispatch, getState) => {
+    // getState 可获取所有state
+    axios.post('/user/readMsg', {from}).then(res => {
+      if (res.status === 200 && res.data.code === 0) {
+        const userId = getState().user._id
+        dispatch(msgRead({from, userId, num: res.data.num}))
+      }
     })
   }
 }
