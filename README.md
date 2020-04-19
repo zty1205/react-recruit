@@ -1,3 +1,61 @@
+# React-Recruit
+
+## Run Project
+1. clone project and install dependencies: 克隆项目，下载依赖
+2. install MongoDB and run mongod: 按照MongoDB，并启动MongoDB服务
+3. npm run server / npm run client: 启动后台服务
+4. npm run start: 启动react项目
+
+## Project Structure
+
+_ public: public documents
+
+_ server: server project
+
+|__ app.js: server entry js
+
+|__ controller/ : data controller
+
+|__ DB/ : mogoose documents
+
+_src: front-end project
+
+|__ _redux/ : achieve mini redux 
+
+|__ component/ : react component
+
+|__ redux/ : redux reducer documents
+
+|__ view/ : page js documents
+
+|__ reducers.js : componse reducer
+
+...
+
+## Server
+- express server
+- use mongoose to connect MongoDB and save data
+- use socket.io to initiate websocket link
+
+## Front-End
+- use react, react-dom, react-router, react-router-dom to build basic pages
+- use redux, react-redux to management State Tree
+- use socket.io-cliet to initiate websocket link
+
+## Preview
+
+### page structure
+![page structure](img/recruit.jpg)
+
+![page one](img/page1.jpg)
+
+![page tow](img/page2.jpg)
+
+![page three](img/page3.jpg)
+
+### pages preview
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

@@ -3,7 +3,7 @@ import {List, InputItem, NavBar, Icon, Grid} from 'antd-mobile'
 import { connect } from 'react-redux'
 import { getMsgList, receiveMsg, sendMsg, readMsg } from '../../redux/chat.redux'
 
-const EMOJI = '😀 😃 🤣 😍'.split(' ').filter(x => x).map(v => ({text: v}))
+const EMOJI = '😀 😃 🤣 😍 😀 😃 🤣 😍 😀 😃 🤣 😍 😀 😃 🤣 😍 😀 😃 🤣 😍 😀 😃 🤣 😍 😀 😃 🤣 😍 😀 😃 🤣 😍 😀 😃 🤣 😍'.split(' ').filter(x => x).map(v => ({text: v}))
 
 @connect(
   state => state,
