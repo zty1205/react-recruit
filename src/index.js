@@ -17,7 +17,7 @@ import BossInfo from './view/BossInfo/bossInfo'
 import Chat from './view/Chat/chat'
 import AuthRoute from './component/AuthRoute/authRoute'
 import Dashboard from './component/Dashboard/dashboard'
-
+import App from './app'
 
 
 const store = createStore(reducers, compose(
@@ -31,16 +31,7 @@ ReactDOM.render(
   // <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <AuthRoute></AuthRoute>
-        <Switch>
-          <Route exact path="/" component={Login}></Route>
-          <Route exact path="/login" component={Login}></Route>
-          <Route exact path="/register" component={Register}></Route>
-          <Route exact  path="/bossInfo" component={BossInfo}></Route>
-          <Route exact path="/geniusInfo" component={GeniusInfo}></Route>
-          <Route exact path="/chat/:user" component={Chat}></Route>
-          <Route component={Dashboard}></Route>
-        </Switch>
+        <App></App>
       </BrowserRouter>
     </Provider>
   // </React.StrictMode>

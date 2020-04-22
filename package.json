@@ -22,6 +22,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.9.7",
+    "rc-queue-anim": "^1.8.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
@@ -34,8 +35,12 @@
     "utility": "^1.16.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/node": "^7.8.7",
     "@babel/plugin-proposal-decorators": "^7.8.3",
+    "asset-require-hook": "^1.2.0",
     "babel-plugin-import": "^1.13.0",
+    "css-modules-require-hook": "^4.2.3",
     "customize-cra": "^0.9.1",
     "nodemon": "^2.0.2",
     "react-app-rewired": "^2.1.5"
@@ -43,8 +48,9 @@
   "scripts": {
     "server": "node ./server/app.js",
     "client": "nodemon ./server/app.js --ignore client",
+    "client1": "NODE_ENV=test nodemon --exec babel-node ./server/app.js --ignore client",
     "start": "react-app-rewired start",
-    "build": "rreact-app-rewired build",
+    "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
   },

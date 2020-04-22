@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from 'component/Logo/logo'
+import Logo from '../../component/Logo/logo'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { login } from '../../redux/user.redux'

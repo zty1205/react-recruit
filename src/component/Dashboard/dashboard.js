@@ -1,13 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NavBar } from 'antd-mobile'
-import { Switch, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import NavLinkBar from '../NavLinkBar/navLinkBar'
 import Boss from '../Boss/boss'
 import Genius from '../Genius/genius'
 import User from '../User/user'
 import Msg from '../Msg/msg'
 import { getMsgList, receiveMsg, sendMsg } from '../../redux/chat.redux'
+import QueueAnim from 'rc-queue-anim';
 
 @connect(
 	state => state,
@@ -55,16 +56,19 @@ class Dashboard extends React.Component {
 				component: User
 			}
 		]
+		const page = navList.find(v => v.path === pathname)
 
 		return (
 			<div>
 				<NavBar className='fixd-header' mode='dard'>{navList.find(v => v.path === pathname).title}</NavBar>
 				<div style={{ marginTop: 45 }}>
-					<Switch>
-						{navList.map(v => (
-							<Route key={v.path} path={v.path} component={v.component}></Route>
-						))}
-					</Switch>
+					<QueueAnim type="scaleX" duration={600}>
+					{/* <Switch>
+						{navList.map(v => ( */}
+							<Route key={page.path} path={page.path} component={page.component}></Route>
+						{/* ))}
+					</Switch> */}
+					</QueueAnim>
 				</div>
 
 				<NavLinkBar data={navList}></NavLinkBar>

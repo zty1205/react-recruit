@@ -2,6 +2,7 @@ import React from 'react'
 import {List, InputItem, NavBar, Icon, Grid} from 'antd-mobile'
 import { connect } from 'react-redux'
 import { getMsgList, receiveMsg, sendMsg, readMsg } from '../../redux/chat.redux'
+import QueueAnim from 'rc-queue-anim';
 
 const EMOJI = '😀 😃 🤣 😍 😀 😃 🤣 😍 😀 😃 🤣 😍 😀 😃 🤣 😍 😀 😃 🤣 😍 😀 😃 🤣 😍 😀 😃 🤣 😍 😀 😃 🤣 😍 😀 😃 🤣 😍'.split(' ').filter(x => x).map(v => ({text: v}))
 
@@ -58,18 +59,20 @@ class Chat extends React.Component {
          onLeftClick={()=> this.props.history.goBack()}>
           {userMap[userId].name}
         </NavBar>
-        {chatMsg.map(v => {
-          const avatar = require(`../../component/img/${userMap[v.from].avatar}.png`)
-          return v.from === userId ? (
-            <List key={v._id} className="chat-me">
-              <Item extra={<img src={avatar} alt="头像"></img>}>收到的：{v.content}</Item>
-            </List>
-          ) : (
-            <List key={v._id}>
-              <Item thumb={avatar}>我发出的：{v.content}</Item>
-            </List>
-          )
-        })}
+        <QueueAnim delay={80}>
+          {chatMsg.map(v => {
+            const avatar = require(`../../component/img/${userMap[v.from].avatar}.png`)
+            return v.from === userId ? (
+              <List key={v._id} className="chat-me">
+                <Item extra={<img src={avatar} alt="头像"></img>}>收到的：{v.content}</Item>
+              </List>
+            ) : (
+              <List key={v._id}>
+                <Item thumb={avatar}>我发出的：{v.content}</Item>
+              </List>
+            )
+          })}
+        </QueueAnim>
         <div className="sticker-footer">
           <List>
             <InputItem placeholder="请输入" value={this.state.text}
