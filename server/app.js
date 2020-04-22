@@ -15,7 +15,7 @@ assethook({
   limit: 10000
 })
 import React from 'react'
-import {renderToString} from 'react-dom/server' // renderToString 返回html字符串
+import {renderToString, renderToNodeStream} from 'react-dom/server' // renderToString 返回html字符串
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
@@ -62,7 +62,7 @@ app.use(function(req, res, next) {
     applyMiddleware(thunk)
   ))
   const context = {}
-  const main = renderToString(
+  const mainStream = renderToNodeStream(
     <Provider store={store}>
       <StaticRouter location={req.url} context={context}>
         <App></App>
@@ -78,13 +78,12 @@ app.use(function(req, res, next) {
   const jsScript = jsPoints.map(js => `<script src="${js}"></script>`).join('')
   console.log('cssLink = ', cssLink)
   console.log('jsScript', jsScript)
-  
-  const htmlRes = `
+
+  res.write(`
   <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="Web site created using create-react-app"/>
@@ -93,13 +92,18 @@ app.use(function(req, res, next) {
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root">${main}</div>
-    ${jsScript}
-  </body>
-</html>
-`
-
-  return res.send(htmlRes)
+    <div id="root">`
+  )
+  mainStream.pipe(res, {end: false})
+  mainStream.on('end', function() {
+    res.write(`</div>
+      ${jsScript}
+    </body>
+  </html>`)
+  res.end()
+  })
+  
+  // return res.send(htmlRes)
   // return res.sendFile(path.resolve('build/index.html'))
 })
 app.use('/user', userRouter)

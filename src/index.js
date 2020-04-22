@@ -19,7 +19,7 @@ const store = createStore(reducers, compose(
 ))
 
 
-ReactDOM.render(
+ReactDOM.hydrate(
   (
   // <React.StrictMode>
     <Provider store={store}>
