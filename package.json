@@ -47,8 +47,8 @@
   },
   "scripts": {
     "server": "node ./server/app.js",
-    "client": "nodemon ./server/app.js --ignore client",
-    "client1": "NODE_ENV=test nodemon --exec babel-node ./server/app.js --ignore client",
+    "client1": "nodemon ./server/app.js --ignore client",
+    "client": "NODE_ENV=test nodemon --exec babel-node ./server/app.js --ignore client",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
