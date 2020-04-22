@@ -3,20 +3,13 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter} from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
 import reducers from './reducer'
 
 import 'antd-mobile/dist/antd-mobile.css';
 import './index.css';
 
-import Login from './view/Login/login.js'
-import Register from './view/Register/register.js'
-import GeniusInfo from './view/GeniusInfo/geniusInfo'
-import BossInfo from './view/BossInfo/bossInfo'
-import Chat from './view/Chat/chat'
-import AuthRoute from './component/AuthRoute/authRoute'
-import Dashboard from './component/Dashboard/dashboard'
 import App from './app'
 
 
